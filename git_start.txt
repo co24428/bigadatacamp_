@@ -4,6 +4,7 @@
 2. git상 프로젝트 다운로드
   [ public ]
   $ git clone https://github.com/bongseop2822/python_basic.git
+  [ private ]
   $ git clone https://ID:비번@github.com/bongseop2822/python_basic.git
 3. vs code 에서 py_projects 오픈
 4. git 사용자임을 등록
