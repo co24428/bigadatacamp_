@@ -33,41 +33,63 @@ print("Enjoy Custom Game world")
 #   2.4 20자 이상 입력하면 "20자가 초과되었습니다." 출력하고, 다시 입력 대기한다.
 #   2.5 20자 이내로 입력하면 gameTitle이라는 변수에 게임 제목을 담고 다음 3단계로 진입한다.
 
+#   2.3 아무것도 입력하지 않고 엔터를 치면 
+#       2.3.1 "정확하게 입력하세요!" 출력하고 다시 입력 대기한다
+#       + 스페이스 바 누른 것도 체크 -> input에서 strip 실행
+#   2.4 20자 이상 입력하면 
+#       2.4.1 "20자가 초과되었습니다." 출력하고, 다시 입력 대기한다.
+#   2.5 20자 이내로 입력하면 
+#       2.5.1 gameTitle이라는 변수에 게임 제목을 담고 다음 3단계로 진입한다.
+
 # step 2
+# 게임 제목
 while 1: # 무한루프는 break 필수!
     # 엔터키 칠 때까지 코드를 진행하지 않는다.
-    gameTitle = input("게임 제목을 입력하시오, 단 20자 이내로 입력 가능합니다. : ")
+    tmp = input("게임 제목을 입력하시오,\n \
+         단 20자 이내로 입력 가능합니다. : \n").strip()
 
-    if gameTitle == '': # 공백일 때
+    # tmp == '', len(tmp) == 0
+    if  not tmp: # 공백일 때, 스페이스 바 누른 것도 체크 -> input에서 strip 실행
         print("정확하게 입력하세요!")
-    elif len(gameTitle) > 20: # 20자 초과
+    elif len(tmp) > 20: # 20자 초과
         print("20자가 초과되었습니다.")
     else:
-        break
-print (gameTitle)
+        gameTitle = tmp
+        break # 3단계 진입
+
+# 스코프 - 변수의 사용 가능한 범위
+# 파이썬에서는 함수, 클래스 외부는 무조건 전역변수
+print ('Game Title : ', gameTitle)
 
 # step 3
+# 플레이어 이름
 while 1:
-    player_name = input('플레이어의 닉네임을 입력하시오, 단 15자로 제한한다. : ')
+    tmp = input('플레이어의 닉네임을 입력하시오,\n \
+        단 15자로 제한한다. : \n').strip()
 
-    if gameTitle == '': # 공백일 때
+    if not tmp:
         print("정확하게 입력하세요!")
-    elif len(gameTitle) > 15: # 15자 초과
+    elif len(tmp) > 15:
         print("15자가 초과되었습니다.")
     else:
+        player_name = tmp
         break
-print(player_name)
+print ('player Name : ', player_name)
 
 # step 4
+# 게임 난이도
 while 1:
-    game_level = int(input('게임 난이도를 입력하시오, 단 1~9까지 정수 형태로 제한한다. : '))
-
-    if game_level > 9 or game_level < 1:
-        print("1~9 사이의 난이도를 입력해주세요")
-    elif gameTitle == '': # 공백일 때
+    tmp = input('게임 난이도를 입력하시오,\n \
+        단 1~9까지 정수 형태로 제한한다. : \n').split()
+    if tmp.isnumeric():
+        tmp_int = int(tmp)
+        if tmp_int > 9 or tmp_int < 1:
+            print("잘못된 입력입니다. 1~9 사이의 난이도를 입력해주세요")
+        else:
+            game_level = tmp_int
+            break
+    elif not tmp:
         print("정확하게 입력하세요!")
-    elif type(game_level) != int  : # 15자 초과
-        print("잘못된 입력입니다. 숫자를 입력해주세요")
     else:
-        break
-print(game_level)
+        print("잘못된 입력입니다. 숫자를 입력해주세요")
+print ('Game Level : ', game_level)
