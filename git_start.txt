@@ -9,7 +9,9 @@
 3. vs code 에서 py_projects 오픈
 4. git 사용자임을 등록
   $ git config --global user.email "you@example.com"
+    git config --global user.email "ihwan1236@gmail.com"
   $ git config --global user.name "Your Name"
+    git config --global user.name "ihwan"
 
 -----
 
