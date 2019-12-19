@@ -115,40 +115,125 @@ print("{0:^40}".format("press any key!!"))
 # 특징(feature)를 잡아서 자료구조를 잘 잡아라.
 # 최대한 간편하게, 정수로 처리할 수 있게끔( 패턴 파악 )
 
-card_deck = list()
-card_mark = list("♠♢♥♣")
-card_id = list('A23456789') + ['10'] + list('JQK')
-for i in card_mark:
-    for j in range(0,13):
-        card_deck.append(i+ card_id[j])
+#유저 누계 점수
+user_score = 0
+game_start = True
+
+print("-"*22)
+print("User current score : %s "%(user_score))
+print("-"*22)
+
+while game_start:
+    card_deck = list()
+    card_mark = list("♠♢♥♣")
+    card_id = list('A23456789') + ['10'] + list('JQK')
+    
+    card_dic = dict()
+    for key in card_id:card_dic[ key ] = card_id.index( key ) +1
+    # card_dic = {
+    #     'A':1,
+    #     '2':2,
+    #     '3':3,
+    #     '4':4,
+    #     '5':5,
+    #     '6':6,
+    #     '7':7,
+    #     '8':8,
+    #     '9':9,
+    #     '10':10,
+    #     'J':11,
+    #     'Q':12,
+    #     'K':13
+    # }
+
+    for i in card_mark:
+        for j in range(0,13):
+            card_deck.append(i+ card_id[j])
+            
+    # random.seed(1)
+    random.shuffle(card_deck)
+    use_cards = card_deck[:8]
+
+    user_hand = list()
+    com_hand = list()
+    card_phase = 1
+    for i in range(2):
+            user_hand.append(use_cards.pop())
+            com_hand.append(use_cards.pop())
+
+    while card_phase <= 2:
         
-random.shuffle(card_deck)
+        print('현재 플레이어의 손패 : ')
+        print(user_hand)
+        choice = input("1. 카드를 더 받겠습니까?\n2. 승부를 내겠습니까?   (1 or 2) : ")
 
-use_cards = card_deck[:8]
-print(use_cards)
+        if choice == '1':
+            user_hand.append(use_cards.pop())
+            com_hand.append(use_cards.pop())
+            card_phase = card_phase + 1
+        else:
+            break
 
-user_hand = list()
-com_hand = list()
-card_phase = 1
-for i in range(2):
-        user_hand.append(use_cards.pop())
-        com_hand.append(use_cards.pop())
 
-while card_phase <= 2:
-    choice = input("1. 카드를 더 받겠습니까?\n2. 승부를 내겠습니까?   (1 or 2) : ")
+    # user의 포인트 계산
+    user_final_point = 0
+    for i in range(0,len(user_hand)-1):
+        for j in range(i+1,len(user_hand)):
+            user_point_1 = card_dic[user_hand[i][1:]]
+            user_point_2 = card_dic[user_hand[j][1:]]
+            tmp = user_point_1 + user_point_2
 
-    if choice == '1':
-        user_hand.append(use_cards.pop())
-        com_hand.append(use_cards.pop())
-        card_phase = card_phase + 1
+            if user_point_1 == 1 or user_point_2 == 1:
+                tmp = tmp * 2
+            if user_point_1 == 13 or user_point_2 == 13:
+                tmp = tmp -18
+            if user_final_point < tmp:
+                user_final_point = tmp
+
+    # com의 포인트 계산
+    com_final_point = 0
+    for i in range(0,len(com_hand)-1):
+        for j in range(i+1,len(com_hand)):
+            com_point_1 = card_dic[com_hand[i][1:]]
+            com_point_2 = card_dic[com_hand[j][1:]]
+            tmp = com_point_1 + com_point_2
+
+            if com_point_1 == 1 or com_point_2 == 1:
+                tmp = tmp * 2
+            if com_point_1 == 13 or com_point_2 == 13:
+                tmp = tmp -18
+            if com_final_point < tmp:
+                com_final_point = tmp
+
+
+    print("user : %s"%user_final_point)
+    print("com  : %s"%com_final_point)
+
+    # 승부 계산 후 스코어 할당
+
+    if user_final_point > com_final_point:
+        tmp = (user_final_point - com_final_point) * 100 - (card_phase - 1) *20
+        user_score += tmp
+        print("축하합니다. 이겼습니다. %s score를 획득했습니다."%tmp)
+    elif user_final_point == com_final_point:
+        print("무승부입니다.")
     else:
-        break
-print(user_hand)
-print(com_hand)
+        print("졌습니다.")
+
+
+    
+    print("-"*22)
+    print("User current score : %s "%(user_score))
+    print("-"*22)
+    more_game = input("다시 하시겠습니까? (yes / no) : ")
+    if more_game == "yes":
+        pass
+    else:
+        game_start = False
+        print("Game over!! \n ** Final score : %s"%(user_score))
 
 
 
-# 4. 승패 => 내가 가진 카드 중 최대값 2개를 합산해서, 특별 기능이 있다면 추가 계산해서
-#    높은 쪽이 승리한다.
 # 5. 한번에 이기면 (내 카드의 합 - 컴퓨터 카드의 합)*100점, 카드를 한 번 받으면 20점씩 마이너스.
+# -> 지면 0점
 # 7. 다시 하시겠습니까? yes => 다시 1번부터 시작, no => game over!! > 종료
