@@ -33,7 +33,6 @@ def show_hand():
     print('현재 플레이어의 손패 : ')
     for n in user_hand: print(n, end="  ")
     print()
-    
 
 if not IS_DEV_MODE:
 
