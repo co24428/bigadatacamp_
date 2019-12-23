@@ -53,18 +53,21 @@ def step2():
 
 def step3():
     while True:
+        global player_name
         tmp = input("플레이어의 닉네임을 입력하시오, 단 %s자로 제한한다\n=>" % PLAYER_NAME_LEN_MAX).strip()
         if not tmp:
             print("정확하게 입력하세요!")
         elif len(tmp)>PLAYER_NAME_LEN_MAX:
             print("%s자가 초과되었습니다." % PLAYER_NAME_LEN_MAX) 
         else:
-            global player_name; player_name = tmp
+            player_name = tmp
             break
     # step4
 
 def step4():
     while True:
+        global game_level
+
         tmp = input("게임 난이도를 입력하시오, 단 %d~%d까지 정수 형태로 제한한다" % (GAME_LEVEL_MIN, GAME_LEVEL_MAX)).strip()
         if not tmp:
             print('정확하게 입력하세요')
@@ -76,7 +79,7 @@ def step4():
         if tmp>9 or tmp<1:
             print('1-9까지 사이값으로 정확하게 입력하세요')
             continue    
-        global game_level; game_level = tmp
+        game_level = tmp
         break
 
 def step5():pass
