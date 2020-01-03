@@ -1,13 +1,13 @@
-1. git ÇÁ·ÎÁ§Æ®¸¦ °ü¸®ÇÒ Æú´õ »ý¼º ¹× ÀÌµ¿ 
+1. git í”„ë¡œì íŠ¸ë¥¼ ê´€ë¦¬í•  í´ë” ìƒì„± ë° ì´ë™ 
   $ mkdir py_projects
   $ cd py_projects
-2. git»ó ÇÁ·ÎÁ§Æ® ´Ù¿î·Îµå
+2. gitìƒ í”„ë¡œì íŠ¸ ë‹¤ìš´ë¡œë“œ
   [ public ]
   $ git clone https://github.com/bongseop2822/python_basic.git
   [ private ]
-  $ git clone https://ID:ºñ¹ø@github.com/bongseop2822/python_basic.git
-3. vs code ¿¡¼­ py_projects ¿ÀÇÂ
-4. git »ç¿ëÀÚÀÓÀ» µî·Ï
+  $ git clone https://ID:ë¹„ë²ˆ@github.com/bongseop2822/python_basic.git
+3. vs code ì—ì„œ py_projects ì˜¤í”ˆ
+4. git ì‚¬ìš©ìžìž„ì„ ë“±ë¡
   $ git config --global user.email "you@example.com"
     git config --global user.email "ihwan1236@gmail.com"
   $ git config --global user.name "Your Name"
@@ -15,7 +15,9 @@
 
 -----
 
-github¿¡ ¾÷·Îµå : "commit" - "push"
- - ¼öÁ¤ ÈÄ > ¼Ò½º°ü¸® > Ã¼Å©Ç¥½Ã(commit) > ÁÂÇÏ´Ü¿¡ »õ·Î°íÄ§ ¹Ù(À§, ¾Æ·¡ È­»ìÇ¥) Å¬¸¯ ÈÄ push? > OK
-git¿¡¼­ °¡Á®¿À±â : "pull"
- - ¼Ò½º°ü¸® > ... > pull
+githubì— ì—…ë¡œë“œ : "commit" - "push"
+ - ìˆ˜ì • í›„ > ì†ŒìŠ¤ê´€ë¦¬ > ì²´í¬í‘œì‹œ(commit) > ì¢Œí•˜ë‹¨ì— ìƒˆë¡œê³ ì¹¨ ë°”(ìœ„, ì•„ëž˜ í™”ì‚´í‘œ) í´ë¦­ í›„ push? > OK
+gitì—ì„œ ê°€ì ¸ì˜¤ê¸° : "pull"
+ - ì†ŒìŠ¤ê´€ë¦¬ > ... > pull
+ 
+ fatal: No remote repository specified. Please, specify either a URL or a remote name from which new revisions should be fetched.
